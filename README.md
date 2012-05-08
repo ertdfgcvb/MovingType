@@ -1,4 +1,0 @@
-MovingType
-==========
-
-An animated alphabet.
