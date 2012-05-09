@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-	<set name="legno" year="2012" author="Andreas Gysin"/>			
-	<margin left="0" top="0" bottom="10" right="10"/>	
-	<font height="150" leading="0"/>
-	<background r="0.0" g="0.0" b="0.0" />
-	<animation loop="0" speed="3"/>
-	<system textureMode="1"/>	
-</config>
