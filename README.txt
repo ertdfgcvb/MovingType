@@ -18,8 +18,8 @@ associated to keystrokes. It's possible to build animated letters
 -------------------------------------------------------------------------------
 Examples
 
-A few examples built by students are included with the application: 
-use keys F1 to F7 to load different font sets.
+A few examples mostly built by students are included with the application: 
+use keys F1 to F6 to load different font sets.
 
 -------------------------------------------------------------------------------
 Extra keys
