@@ -8,8 +8,9 @@
 
 #include "LetterManager.h"
 
-//move to main app
-LetterManager::LetterManager(){}
+LetterManager::LetterManager(){
+}
+
 LetterManager::LetterManager(const string &dataPath, const string &configFile){
     this->dataPath = dataPath;
     this->configFile = configFile;    
@@ -23,60 +24,80 @@ LetterManager::~LetterManager(){
 
 void LetterManager::clear(){
     letters.clear();
-    currentPos.set(margin.left, margin.top);
+    insertPos.set(margin.left, margin.top);
+    pos.set(0,0);
+    dpos.set(0,0);
+    sca.set(1,1);
+    dsca.set(1,1);
 }
 
 void LetterManager::update(){
 	for(vector<Letter>::iterator it = letters.begin(); it != letters.end();){
 		Letter& letter = *it;
-		if(letter.isDead()){
-			letters.erase( it );
-		}else{
+		if(letter.isInView(pos)){
 			letter.update();
 			++it;
+		}else{
+			letters.erase( it );
 		}
 	}
+    pos += (dpos - pos) * 0.05f; //LOVE!
+    sca += (dsca - sca) * 0.05f;     
 }
 
 void LetterManager::draw(){
+        
+    gl::pushModelView ();
+    gl::translate(pos);
+    gl::scale(sca);
+    
 	for(vector<Letter>::iterator it = letters.begin(); it != letters.end(); ++it){
 		it->draw();
 	}
-}
-
-void LetterManager::addLetter( const vector<Surface8u> &sequence ){
-    Letter l(currentPos, sequence );
-    l.configure(fontHeight, animationSpeed, animationLoop);
-	letters.push_back( l );
-    currentPos.x += l.getWidth();
-    if (currentPos.x >= getWindowWidth() - margin.right) newLine();
-}
-
-void LetterManager::addLetter( const vector<gl::Texture> &sequence ){
-    Letter l(currentPos, sequence );
-    l.configure(fontHeight, animationSpeed, animationLoop);
-	letters.push_back( l );
-    currentPos.x += l.getWidth();
-    if (currentPos.x >= getWindowWidth() - margin.right) newLine();
+    
+    gl::popModelView();
 }
 
 void LetterManager::addLetter( string letterName ){
+    //Caution: total mess here... need to figure out how things work
+    //Q1: possibility of a constructor with generic type?
+    //Q2: how to create an empty class var and test it (null?)?
+    Letter l;
+    bool init = false;
     if (!textureMode && images[letterName].size() > 0) {
-        addLetter(images[letterName]);
+        l = Letter(insertPos, images[letterName]);
+        init = true;
     } else if(textureMode && textures[letterName].size() > 0) {
-        addLetter(textures[letterName]);
-    }        
+        l = Letter(insertPos, textures[letterName]);
+        init = true;
+    }
+    if (init) {        
+        l.configure(fontHeight, animationSpeed, animationLoop);	
+        if (l.getPos().x + l.getSize().x >= getWindowWidth() - margin.right){
+            newLine();
+            l.setPos(insertPos);
+        }
+        
+        letters.push_back(l); //why does this not work as expected?
+        
+        insertPos.x += l.getSize().x;
+        if (insertPos.x >= getWindowWidth() - margin.right) newLine();
+        
+        if (insertPos.y + fontHeight + dpos.y >= getWindowHeight() - margin.bottom){
+            dpos.y -= getWindowHeight() / 2;
+        }
+    }
 }
 
 void LetterManager::newLine(){
-    currentPos.x = margin.left;
-    currentPos.y += fontHeight + fontLeading;
+    insertPos.x = margin.left;
+    insertPos.y += fontHeight + fontLeading;
 }
 
 void LetterManager::back(){
     if (letters.size() > 0) {
         Letter l = letters.back();
-        currentPos.set(l.getPos());
+        insertPos.set(l.getPos());
         letters.pop_back();
     }
 }
@@ -181,9 +202,14 @@ void LetterManager::loadImages(int setNum){
                     console() << s.str();                     
                     try{
                         Surface8u surf = loadImage(DataSourcePath::create( file ));
+//                        int h = (int) fontHeight;
+//                        int w = (int) fontHeight * surf.getAspectRatio();
+//                        Surface8u scaled( w, h, false );
+//                        ip::resize(surf, scaled, FilterTriangle(1.0f));
                         images[setName].push_back(surf);                            
                         if (textureMode){
-                            textures[setName].push_back(gl::Texture(surf));    
+                            gl::Texture t = gl::Texture(surf);
+                            textures[setName].push_back(t);    
                         }
                         console() << " OK\n";   
                     } catch( ... ) {                        

@@ -53,6 +53,7 @@ void movingTypeApp::setup(){
     path p = getAppPath();
     string absolutePath = p.parent_path().string() + "/" + DATA_FOLDER;
     font = Font(loadResource( FONT ), 24 );
+    
     lm = LetterManager(absolutePath, CONFIG_FILE);
     lm.loadSet(0);
 }
@@ -88,7 +89,7 @@ void movingTypeApp::keyDown(KeyEvent event ) {
         char c = event.getChar();
         int n = (int) c;
         
-        if (n >= 0) { //needs a fix for ç and è etc.
+        if (n >= 0) { // needs a fix for ç and è etc.
             stringstream s;
             
             if (n == 13){
@@ -96,7 +97,10 @@ void movingTypeApp::keyDown(KeyEvent event ) {
             } else if (n == 127){
                 lm.back();           
             } else if (n >=97 && n <= 122) {
+                // if (capsLock) s << "uppercase_" << (c-32);
+                // else 
                 s << "lowercase_" << c;
+                
             } else if (n >= 65 && n <= 90) {
                 s << "uppercase_" << (char)(c+32);
             } else if (n >= 48 && n <= 57) {

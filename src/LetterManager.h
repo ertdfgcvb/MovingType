@@ -14,6 +14,8 @@
 
 #include "Letter.h"
 
+#include "cinder/Filter.h"
+#include "cinder/ip/Resize.h"
 #include "cinder/gl/Texture.h"
 #include "cinder/Vector.h"
 #include "cinder/app/AppBasic.h"
@@ -52,10 +54,7 @@ protected:
     void loadConfig(int setNum);
     void loadImages(int setNum);
 
-    void addLetter( const vector<Surface8u> &sequence );
     map <string, vector<Surface8u> > images;
-    
-    void addLetter( const vector<gl::Texture> &sequence );
     map <string, vector<gl::Texture> > textures;
     
     struct Margin {
@@ -66,7 +65,8 @@ protected:
     } margin;
     
     vector<Letter> letters;
-    Vec2f currentPos;
+    Vec2f pos, dpos, sca, dsca;
+    Vec2f insertPos;
     float fontHeight, fontLeading;
     int animationSpeed;
     bool animationLoop;

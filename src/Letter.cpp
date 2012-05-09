@@ -7,57 +7,68 @@
 //
 
 #include "Letter.h"
-
+Letter::Letter(){};
 Letter::Letter(const Vec2f &pos, const vector<Surface8u> &images){
-    textureMode = false;
-    numFrames = images.size();
 	this->pos = Vec2f(pos);
 	this->images = images;
+    textureMode = false;
+    numFrames = images.size();
     //std::cout << "addr: " << &images[0] << " textureMode=false\n";
 }
 
 Letter::Letter(const Vec2f &pos, const vector<gl::Texture> &textures){
-    textureMode = true;
-    numFrames = textures.size();
 	this->pos = Vec2f(pos);
 	this->textures = textures;
+    textureMode = true;
+    numFrames = textures.size();
     //std::cout << "addr: " << &textures[0] << " textureMode=true\n";
 }
 
 void Letter::configure(float height, int speed, bool loop){
     setHeight(height);
     frameCount = 0;
-    if (speed < 1) speed = 1;
-    this->speed = speed;
+    this->speed = max(1,speed);
     this->loop = loop;    
 }
 
 void Letter::update(){
-    frameCount++;
-    currentFrame = frameCount / speed;
     if (loop) {
-        currentFrame = currentFrame % numFrames;
+        currentFrame = (frameCount / speed) % numFrames;
     } else {
-        currentFrame = min(currentFrame, numFrames-1);
+        currentFrame = min(frameCount / speed, numFrames-1);
     }
+    frameCount++;    
 }
 
 void Letter::setHeight(float h){
     float a;
     if (!textureMode) a = images[0].getAspectRatio();
-    else a = textures[0].getAspectRatio();
-    
+    else a = textures[0].getAspectRatio();    
     float w = h * a;
     dim.set(w, h);
+}
+
+bool Letter::isInView(const Vec2f &offset){
+    Vec2f screenPos = Vec2f(offset);
+    screenPos += pos;
+    
+    if (screenPos.x + dim.x < 0 || screenPos.x > getWindowWidth() || screenPos.y + dim.y < 0 || screenPos.y > getWindowHeight()){ 
+        return false;
+    }
+    return true;
+}
+
+void Letter::setPos(const Vec2f &pos){
+    this->pos = Vec2f(pos);
 }
 
 Vec2f Letter::getPos(){
     return pos;
 }
 
-float Letter::getWidth(){
-    return dim.x;
-}
+Vec2f Letter::getSize(){
+    return dim;
+} 
 
 void Letter::draw(){
     if (!textureMode) gl::draw( gl::Texture(images[currentFrame]), Area(pos.x, pos.y, pos.x + dim.x, pos.y + dim.y) );
@@ -65,5 +76,5 @@ void Letter::draw(){
 }
 
 bool Letter::isDead(){
-	return false;
+    return false;
 }

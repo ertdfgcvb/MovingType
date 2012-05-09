@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<set name="Stencil" year="2007" author="Sivlio Emanuele"/>			
+	<margin left="20" top="0" bottom="50" right="20"/>	
+	<font height="100" leading="0"/>
+	<background r="1.0" g="1.0" b="1.0" />
+	<animation loop="0" speed="2"/>
+	<system textureMode="1"/>	
+</config>

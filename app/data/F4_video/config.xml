@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<set name="Video" year="2007" author="Hai Thuy Tran"/>			
+	<margin left="0" top="0" bottom="50" right="0"/>	
+	<font height="200" leading="0"/>
+	<background r="0.0" g="0.0" b="0.0" />
+	<animation loop="0" speed="2"/>
+	<system textureMode="1"/>	
+</config>
