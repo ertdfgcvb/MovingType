@@ -70,6 +70,7 @@ protected:
     float fontHeight, fontLeading;
     int animationSpeed;
     bool animationLoop;
+    bool checkSet(int setNum);
     vector <float> margins;
     vector <path> getFileList(string folder, int filter);
 };

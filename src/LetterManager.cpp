@@ -46,7 +46,7 @@ void LetterManager::update(){
 }
 
 void LetterManager::draw(){
-        
+    
     gl::pushModelView ();
     gl::translate(pos);
     gl::scale(sca);
@@ -116,10 +116,20 @@ vector <path> LetterManager::getFileList(string folder, int filter=0){ // 0=all,
     return res;
 }
 
+bool LetterManager::checkSet(int setNum){
+    //folder exists
+    if (setNum >= getFileList(dataPath, 1).size()) return false;    
+    
+    //to do: better check    
+    return true; 
+}
+
 void LetterManager::loadSet(int setNum){
-    loadConfig(setNum);
-    loadImages(setNum);    
-    clear();
+    if (checkSet(setNum)){
+        clear();
+        loadConfig(setNum);
+        loadImages(setNum);   
+    }
 }
 
 void LetterManager::loadConfig(int setNum){
@@ -202,10 +212,10 @@ void LetterManager::loadImages(int setNum){
                     console() << s.str();                     
                     try{
                         Surface8u surf = loadImage(DataSourcePath::create( file ));
-//                        int h = (int) fontHeight;
-//                        int w = (int) fontHeight * surf.getAspectRatio();
-//                        Surface8u scaled( w, h, false );
-//                        ip::resize(surf, scaled, FilterTriangle(1.0f));
+                        //                        int h = (int) fontHeight;
+                        //                        int w = (int) fontHeight * surf.getAspectRatio();
+                        //                        Surface8u scaled( w, h, false );
+                        //                        ip::resize(surf, scaled, FilterTriangle(1.0f));
                         images[setName].push_back(surf);                            
                         if (textureMode){
                             gl::Texture t = gl::Texture(surf);
