@@ -12,8 +12,9 @@ Andreas Gysin
 -------------------------------------------------------------------------------
 Purpose
 
-This quite simple program permits to display image sequences 
-associated to keystrokes. It's possible to build animated letters 
+This quite simple program permits to display image sequences associated 
+to keystrokes. It permits – but is not limited to – building 
+animated alphabets, hence the name.
 
 -------------------------------------------------------------------------------
 Examples
