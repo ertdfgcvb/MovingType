@@ -144,10 +144,11 @@ void LetterManager::loadConfig(int setNum){
             path folder = sub.at(setNum);
             XmlTree doc;
             //config file
-            console() << "Loading config file [" << folder.string() + "/" + configFile << "]...";
+            console() << "Loading config file [" << folder.string() + "/" + configFile << "]... ";
             try{
                 XmlTree doc( loadFile( folder.string() + "/" + configFile) );
                 console() << "OK\n";
+                console() << "Parsing config file... ";                
                 //rewrite...            
                 try{
                     XmlTree cfg = doc.getChild( "config" );
@@ -163,8 +164,7 @@ void LetterManager::loadConfig(int setNum){
                     float r        = cfg.getChild("background").getAttributeValue<float>( "r", 0.0f ); 
                     float g        = cfg.getChild("background").getAttributeValue<float>( "g", 0.0f );
                     float b        = cfg.getChild("background").getAttributeValue<float>( "b", 0.0f );                
-                    bgColor = Color(r,g,b);
-                    
+                    bgColor = Color(r,g,b);                    
                     console() << "OK\n";
                 } catch(...){
                     console() << "ERROR\n";
@@ -172,7 +172,6 @@ void LetterManager::loadConfig(int setNum){
             } catch(...){
                 console() << "ERROR\n ";    
             }
-            console() << "Parsing config file... ";                
         } else {
             console() << "Set [" << setNum << "] doesn't exist!\n";
         }

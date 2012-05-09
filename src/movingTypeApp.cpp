@@ -55,6 +55,7 @@ void movingTypeApp::setup(){
     font = Font(loadResource( FONT ), 24 );
     
     lm = LetterManager(absolutePath, CONFIG_FILE);
+    
     lm.loadSet(0);
 }
 
