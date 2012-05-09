@@ -77,9 +77,9 @@ to avoid this use leading zeroes:
 The configuration file
 
 Each set needs a configuration file to work properly. 
-The file has to be named "config.xml" and needs to reside in the set folder.
+The file has to be named 'config.xml' and needs to reside in the set folder.
 
-Keys in the file:
+Keys in 'config.xml' the file:
 
 < set />         specify name, year and author of the set
 < margin />      specify margins (in pixels)
