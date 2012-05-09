@@ -2,8 +2,8 @@
 MovingType
 
 An animated alphabet.
-Built and created for a two days workshop 
-with first year students at SUPSI, Lugano
+Built and created for a two days workshop with first year students 
+at SUPSI, Lugano
 Adapted from a previous AS3 version
 by
 Andreas Gysin
@@ -110,7 +110,8 @@ A WebGL port is planned (maybe)
 Author: 
 	Andreas Gysin
 	@andreasgysin
-	
+
+	http://ertdfgcvb.com
 	http://github.com/ertdfgcvb/MovingType	
 
 -------------------------------------------------------------------------------
