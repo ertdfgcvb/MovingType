@@ -2,8 +2,9 @@
 MovingType
 
 An animated alphabet.
-Built and created for a 2 days workshop with 1st year students at SUPSI, Lugano
-Adapted from a previous AS3 sketch
+Built and created for a two days workshop 
+with first year students at SUPSI, Lugano
+Adapted from a previous AS3 version
 by
 Andreas Gysin
 2007-2012
