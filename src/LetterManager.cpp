@@ -13,7 +13,8 @@ LetterManager::LetterManager(){
 
 LetterManager::LetterManager(const string &dataPath, const string &configFile){
     this->dataPath = dataPath;
-    this->configFile = configFile;    
+    this->configFile = configFile;  
+    clear();
 }
 
 LetterManager::~LetterManager(){
