@@ -22,6 +22,8 @@
 #include "cinder/Filesystem.h" 
 #include "cinder/ImageIo.h"
 #include "cinder/Xml.h"
+#include "cinder/Text.h"
+
 
 
 using namespace fs; //
@@ -32,7 +34,7 @@ using namespace std;
 class LetterManager{
 public:
     LetterManager();
-	LetterManager(const string &dataPath, const string &configFile);
+	LetterManager(const string &dataPath, const string &configFile, const Font &font);
 	~LetterManager();
 	void update();
 	void draw();
@@ -42,12 +44,15 @@ public:
     void back();
     void clear();
     void loadSet(int setNum);
+    void drawLabel();
     Color bgColor;
     
     
 protected:    
     string configFile;
     string dataPath;
+    
+    Font font;
     
     bool textureMode;
     
@@ -56,6 +61,13 @@ protected:
 
     map <string, vector<Surface8u> > images;
     map <string, vector<gl::Texture> > textures;
+    
+    struct Label {
+        string name;
+        string year;
+        string author;
+        float alpha;
+    } label;
     
     struct Margin {
         float left;

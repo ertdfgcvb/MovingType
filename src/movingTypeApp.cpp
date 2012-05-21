@@ -2,7 +2,6 @@
 
 #include "cinder/app/AppBasic.h"
 #include "cinder/Filesystem.h" 
-#include "cinder/Text.h"
 #include "cinder/Vector.h"
 #include "cinder/gl/gl.h"
 
@@ -19,7 +18,6 @@ const string FONT = "MISO-REG.OTF";
 
 class movingTypeApp : public AppBasic {
 private:
-    Font font;
     LetterManager lm;
     
 	void prepareSettings( Settings *settings );
@@ -33,14 +31,6 @@ private:
     void drawLabel( string *s );
     void loadSet( int setNum );  
 };
-/*
- - (std::string)getAppPath{
- NSString *resultPath = [[NSBundle mainBundle] bundlePath];
- std::string result;
- result = [resultPath cStringUsingEncoding:NSUTF8StringEncoding];
- return result;
- }
- */
 
 void movingTypeApp::prepareSettings( Settings *settings ){
     settings->setWindowSize( 900, 700 );
@@ -52,21 +42,12 @@ void movingTypeApp::prepareSettings( Settings *settings ){
 void movingTypeApp::setup(){
     path p = getAppPath();
     string absolutePath = p.parent_path().string() + "/" + DATA_FOLDER;
-    font = Font(loadResource( FONT ), 24 );
+    Font font = Font(loadResource( FONT ), 24 );
     
-    lm = LetterManager(absolutePath, CONFIG_FILE);
+    lm = LetterManager(absolutePath, CONFIG_FILE, font);
     
     lm.loadSet(0);
 }
-
-void movingTypeApp::drawLabel(string *s){    
-    TextLayout simple;
-    simple.setFont( font );
-    simple.setColor( Color( 1,1,1 ) );
-    simple.addLine( *s );
-    gl::draw( simple.render( true, true ) , Vec2f( 20, 20 ) ); 
-}
-
 
 void movingTypeApp::mouseDown( MouseEvent event ){
 }
@@ -79,6 +60,7 @@ void movingTypeApp::draw(){
     gl::clear( lm.bgColor ); 
     lm.draw();
 }
+
 
 void movingTypeApp::keyDown(KeyEvent event ) {
     
@@ -118,15 +100,15 @@ void movingTypeApp::keyDown(KeyEvent event ) {
 }
 
 void movingTypeApp::keyUp( KeyEvent event ) {
-    if( event.getCode() == KeyEvent::KEY_F1 ) lm.loadSet(0);
-    else if( event.getCode() == KeyEvent::KEY_F2 ) lm.loadSet(1);
-    else if( event.getCode() == KeyEvent::KEY_F3 ) lm.loadSet(2);
-    else if( event.getCode() == KeyEvent::KEY_F4 ) lm.loadSet(3);
-    else if( event.getCode() == KeyEvent::KEY_F5 ) lm.loadSet(4);
-    else if( event.getCode() == KeyEvent::KEY_F6 ) lm.loadSet(5);
-    else if( event.getCode() == KeyEvent::KEY_F7 ) lm.loadSet(6);
-    else if( event.getCode() == KeyEvent::KEY_F8 ) lm.loadSet(7);
-    else if( event.getCode() == KeyEvent::KEY_F9 ) lm.loadSet(8);
+         if( event.getCode() == KeyEvent::KEY_F1 )  lm.loadSet(0);
+    else if( event.getCode() == KeyEvent::KEY_F2 )  lm.loadSet(1);
+    else if( event.getCode() == KeyEvent::KEY_F3 )  lm.loadSet(2);
+    else if( event.getCode() == KeyEvent::KEY_F4 )  lm.loadSet(3);
+    else if( event.getCode() == KeyEvent::KEY_F5 )  lm.loadSet(4);
+    else if( event.getCode() == KeyEvent::KEY_F6 )  lm.loadSet(5);
+    else if( event.getCode() == KeyEvent::KEY_F7 )  lm.loadSet(6);
+    else if( event.getCode() == KeyEvent::KEY_F8 )  lm.loadSet(7);
+    else if( event.getCode() == KeyEvent::KEY_F9 )  lm.loadSet(8);
     else if( event.getCode() == KeyEvent::KEY_F10 ) lm.loadSet(9);
     else if( event.getCode() == KeyEvent::KEY_F11 ) lm.loadSet(10);
     else if( event.getCode() == KeyEvent::KEY_F12 ) lm.loadSet(11);

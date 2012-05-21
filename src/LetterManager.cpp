@@ -11,7 +11,8 @@
 LetterManager::LetterManager(){
 }
 
-LetterManager::LetterManager(const string &dataPath, const string &configFile){
+LetterManager::LetterManager(const string &dataPath, const string &configFile, const Font &font){
+    this->font = font;
     this->dataPath = dataPath;
     this->configFile = configFile;  
     clear();
@@ -30,6 +31,7 @@ void LetterManager::clear(){
     dpos.set(0,0);
     sca.set(1,1);
     dsca.set(1,1);
+    label.alpha = 0;
 }
 
 void LetterManager::update(){
@@ -54,9 +56,9 @@ void LetterManager::draw(){
     
 	for(vector<Letter>::iterator it = letters.begin(); it != letters.end(); ++it){
 		it->draw();
-	}
-    
+	}    
     gl::popModelView();
+    drawLabel();
 }
 
 void LetterManager::addLetter( string letterName ){
@@ -100,6 +102,27 @@ void LetterManager::back(){
         Letter l = letters.back();
         insertPos.set(l.getPos());
         letters.pop_back();
+    }
+}
+
+void LetterManager::drawLabel(){    
+    if (label.alpha > 0){
+        TextLayout simple;
+        float a = (label.alpha < 1.0f) ? label.alpha : 1.0f;
+        simple.setBorder(20, 10);
+        simple.clear( Color(0,0,0));
+        // simple.setLeadingOffset(3.0f);
+        simple.setFont( font );
+        simple.setColor( Color( 1,1,1 ) );
+        simple.addLine( label.name );
+        simple.addLine( label.year );
+        simple.addLine( label.author );
+        gl::enableAlphaBlending();
+        gl::color( ColorA(1, 1, 1, a) ); // red, green, blue, alpha
+        
+        gl::draw( simple.render( true, false ) , Vec2f( 0, 0 ) ); 
+        gl::disableAlphaBlending();
+        label.alpha -= 0.02f;
     }
 }
 
@@ -153,6 +176,10 @@ void LetterManager::loadConfig(int setNum){
                 //rewrite...            
                 try{
                     XmlTree cfg = doc.getChild( "config" );
+                    label.name     = cfg.getChild("set").getAttributeValue<string>( "name", "Untitled" );
+                    label.author   = cfg.getChild("set").getAttributeValue<string>( "author", "Anonymous" );
+                    label.year     = cfg.getChild("set").getAttributeValue<string>( "year", "0000" );
+                    label.alpha    = 3.0f;
                     fontHeight     = cfg.getChild("font").getAttributeValue<float>( "height", 80.0f );
                     fontLeading    = cfg.getChild("font").getAttributeValue<float>( "leading", 10.0f );
                     animationSpeed = cfg.getChild("animation").getAttributeValue<int>( "speed", 80.0f );
@@ -165,7 +192,8 @@ void LetterManager::loadConfig(int setNum){
                     float r        = cfg.getChild("background").getAttributeValue<float>( "r", 0.0f ); 
                     float g        = cfg.getChild("background").getAttributeValue<float>( "g", 0.0f );
                     float b        = cfg.getChild("background").getAttributeValue<float>( "b", 0.0f );                
-                    bgColor = Color(r,g,b);                    
+                    bgColor = Color(r,g,b);                        
+
                     console() << "OK\n";
                 } catch(...){
                     console() << "ERROR\n";
