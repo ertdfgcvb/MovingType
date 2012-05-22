@@ -4,6 +4,6 @@
 	<margin left="0" top="0" bottom="50" right="0"/>	
 	<font height="100" leading="0"/>
 	<background r="0.12" g="0.12" b="0.12" />
-	<animation loop="2" speed="5"/>
+	<animation loop="2" speed="4"/>
 	<system textureMode="1"/>	
 </config>
