@@ -24,20 +24,31 @@ Letter::Letter(const Vec2f &pos, const vector<gl::Texture> &textures){
     //std::cout << "addr: " << &textures[0] << " textureMode=true\n";
 }
 
-void Letter::configure(float height, int speed, bool loop){
+void Letter::configure(float height, int speed, int loop){
     setHeight(height);
     frameCount = 0;
     this->speed = max(1,speed);
-    this->loop = loop;    
+    this->loop = loop;
+    dir = 1;
 }
 
 void Letter::update(){
-    if (loop) {
+    if (loop == 1) {
         currentFrame = (frameCount / speed) % numFrames;
+    } else if (loop == 2) {
+        
+        currentFrame = frameCount / speed;
+        if (currentFrame >= numFrames) {
+            currentFrame = numFrames - 1;
+            dir = -1;
+        } else if (currentFrame < 0) {
+            currentFrame = 0;
+            dir = 1;
+        }
     } else {
         currentFrame = min(frameCount / speed, numFrames-1);
     }
-    frameCount++;    
+    frameCount+=dir;    
 }
 
 void Letter::setHeight(float h){

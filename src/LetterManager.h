@@ -81,7 +81,7 @@ protected:
     Vec2f insertPos;
     float fontHeight, fontLeading;
     int animationSpeed;
-    bool animationLoop;
+    int animationLoop;
     bool checkSet(int setNum);
     vector <float> margins;
     vector <path> getFileList(string folder, int filter);

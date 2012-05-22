@@ -26,7 +26,7 @@ public:
 	Letter(const Vec2f &pos, const vector<Surface8u> &images);
 	Letter(const Vec2f &pos, const vector<gl::Texture> &textures);
 
-    void configure(float height, int speed, bool loop);
+    void configure(float height, int speed, int loop);
 
     
 	void update();
@@ -40,7 +40,7 @@ public:
     
 protected:
     int frameCount, speed, currentFrame, numFrames;
-    bool loop;
+    int loop, dir;
     Vec2f dim;
 	Vec2f pos;
 	vector<Surface8u> images;

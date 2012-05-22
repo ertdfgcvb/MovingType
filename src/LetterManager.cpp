@@ -31,6 +31,7 @@ void LetterManager::clear(){
     sca.set(1,1);
     dsca.set(1,1);
     label.alpha = 0;
+    insertPos.set(margin.left, margin.top);
 }
 
 void LetterManager::update(){
@@ -182,7 +183,7 @@ void LetterManager::loadConfig(int setNum){
                     fontHeight     = cfg.getChild("font").getAttributeValue<float>( "height", 80.0f );
                     fontLeading    = cfg.getChild("font").getAttributeValue<float>( "leading", 10.0f );
                     animationSpeed = cfg.getChild("animation").getAttributeValue<int>( "speed", 80.0f );
-                    animationLoop  = cfg.getChild("animation").getAttributeValue<bool>( "loop", 10.0f );
+                    animationLoop  = cfg.getChild("animation").getAttributeValue<int>( "loop", 0 );
                     margin.left    = cfg.getChild("margin").getAttributeValue<float>( "left", 10.0f );
                     margin.right   = cfg.getChild("margin").getAttributeValue<float>( "right", 10.0f );
                     margin.top     = cfg.getChild("margin").getAttributeValue<float>( "top", 10.0f );
