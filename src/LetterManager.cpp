@@ -149,9 +149,9 @@ bool LetterManager::checkSet(int setNum){
 }
 
 void LetterManager::loadSet(int setNum){
-    if (checkSet(setNum)){
-        clear();
+    if (checkSet(setNum)){        
         loadConfig(setNum);
+        clear();
         loadImages(setNum);   
     }
 }
