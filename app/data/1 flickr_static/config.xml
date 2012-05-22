@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
 	<set name="Flickr Static" year="2012" author="Andreas Gysin"/>			
-	<margin left="0" top="0" bottom="0" right="0"/>	
+	<margin left="0" top="0" bottom="50" right="0"/>	
 	<font height="100" leading="0"/>
 	<background r="1.0" g="1.0" b="1.0" />
 	<animation loop="0" speed="5"/>
