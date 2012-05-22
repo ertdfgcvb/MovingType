@@ -90,7 +90,8 @@ Keys in 'config.xml' the file:
                  black   r = 0.0   g = 0.0   b = 0.0	
                  white   r = 1.0   g = 1.0   b = 1.0
                  orange  r = 1.0   g = 0.5   b = 0.0
-< animation />   set loop (0 or 1) and speed (1 = fastest, 10 = slower, etc)	
+< animation />   set loop (0 = off, 1 = loop, 2 = ping pong) 
+                 and speed measured in frame (1 = fastest, 10 = slower, etc)	
 < system />      set textureMode = 1 for best performance 
                  set textureMode = 0 for better memory usage
 
