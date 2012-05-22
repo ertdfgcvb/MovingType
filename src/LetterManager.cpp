@@ -26,7 +26,6 @@ LetterManager::~LetterManager(){
 
 void LetterManager::clear(){
     letters.clear();
-    insertPos.set(margin.left, margin.top);
     pos.set(0,0);
     dpos.set(0,0);
     sca.set(1,1);
@@ -150,8 +149,8 @@ bool LetterManager::checkSet(int setNum){
 
 void LetterManager::loadSet(int setNum){
     if (checkSet(setNum)){        
-        loadConfig(setNum);
         clear();
+        loadConfig(setNum);
         loadImages(setNum);   
     }
 }
@@ -188,6 +187,7 @@ void LetterManager::loadConfig(int setNum){
                     margin.right   = cfg.getChild("margin").getAttributeValue<float>( "right", 10.0f );
                     margin.top     = cfg.getChild("margin").getAttributeValue<float>( "top", 10.0f );
                     margin.bottom  = cfg.getChild("margin").getAttributeValue<float>( "bottom", 10.0f );        
+                    insertPos.set(margin.left, margin.top);
                     textureMode    = cfg.getChild("system").getAttributeValue<bool>( "textureMode", false );  
                     float r        = cfg.getChild("background").getAttributeValue<float>( "r", 0.0f ); 
                     float g        = cfg.getChild("background").getAttributeValue<float>( "g", 0.0f );
