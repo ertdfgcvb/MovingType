@@ -19,8 +19,8 @@ animated alphabets, hence the name.
 -------------------------------------------------------------------------------
 Examples
 
-A few examples mostly built by students are included with the application: 
-use keys F1 to F6 to load different font sets.
+A few examples built by students are included with the application: 
+press F1 to F12 to load different font sets (wait for loading).
 
 -------------------------------------------------------------------------------
 Extra keys
@@ -91,7 +91,7 @@ Keys in 'config.xml' the file:
                  white   r = 1.0   g = 1.0   b = 1.0
                  orange  r = 1.0   g = 0.5   b = 0.0
 < animation />   set loop (0 = off, 1 = loop, 2 = ping pong) 
-                 and speed measured in frame (1 = fastest, 10 = slower, etc)	
+                 and speed measured in frames (1 = fastest, 10 = slower, etc)	
 < system />      set textureMode = 1 for best performance 
                  set textureMode = 0 for better memory usage
 
@@ -104,9 +104,10 @@ Additional notes on animations
    frames should not exceed a height of 256px.
 
 -------------------------------------------------------------------------------
-Future
+To do
 
-A WebGL port is planned (maybe)
+ - Asynchronous image loader with progress indicator
+ - A WebGL port is planned (maybe)
 
 -------------------------------------------------------------------------------
 Author: 
