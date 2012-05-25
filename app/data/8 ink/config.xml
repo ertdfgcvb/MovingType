@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<set name="Inklass_inf" year="2012" author="Luca Menghini"/>			
+	<margin left="0" top="0" bottom="50" right="0"/>	
+	<font height="100" leading="0"/>
+	<background r="1.0" g="1.0" b="1.0" />
+	<animation loop="2" speed="1"/>
+	<system textureMode="1"/>	
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<set name="Pastelli" year="2012" author="Lorenzo Marinuzzi"/>			
+	<margin left="0" top="0" bottom="10" right="10"/>	
+	<font height="50" leading="0"/>
+	<background r="1.0" g="0.5" b="0.0" />
+	<animation loop="0" speed="6"/>
+	<system textureMode="1"/>	
+</config>
