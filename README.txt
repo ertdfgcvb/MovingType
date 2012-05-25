@@ -114,7 +114,7 @@ Author:
 	Andreas Gysin
 	@andreasgysin
 
-	http://ertdfgcvb.com
+	http://ertdfgcvb.com/movingtype
 	http://github.com/ertdfgcvb/MovingType	
 
 -------------------------------------------------------------------------------
