@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<set name="njksd" year="2013" author="Samanta Martinoli"/>			
+	<margin left="0" top="0" bottom="0" right="0"/>	
+	<font height="100" leading="0"/>
+	<background r="0.2" g="0.2" b="0.2" />
+	<animation loop="2" speed="4"/>
+	<system textureMode="1"/>	
+</config>
